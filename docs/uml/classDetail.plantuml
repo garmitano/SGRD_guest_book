@@ -1,0 +1,77 @@
+@startuml ClassDetail
+
+class Person{
+    - Long idPerson
+    - int dni
+    - String fullName
+    - String town
+    - String province
+    - String country
+    - String phone
+    - String email
+    - String birthdate
+}
+
+class GuestType{
+    - Long idGuestType
+    - String type
+    - String detail
+}
+
+class Employee{
+    - Long idEmployee
+    - Long idPerson
+    - String type
+}
+
+class RoomType{
+    - Long idRoomType
+    - String type
+    - int price
+    - String detail
+}
+
+class Room{
+    - Long idRoom
+    - Long idRoomType
+    - String state
+    - String detail
+}
+
+class Payment{
+    - Long idPayment
+    - int amount
+    - String method
+    - Long ticket
+    - Long creditCard
+}
+
+class Registry{
+    - Long idRegistry
+    - localdate checkinx
+    - Long idRoom
+    - localdate checkout
+    - Long idGuestType
+    - Long idEmployee
+    - Long idPayment
+    - String numTicket
+}
+
+class RegistryDetail{
+    - Long idRegistry
+    - Long idPerson
+}
+
+class Book{
+    - Long idBook
+    - localdate checkin
+    - Long idRoomType
+    - Long idPerson
+    - Long idGuestType
+    - Long idPayment
+    - String state
+    - String detail
+}
+
+
+@enduml
