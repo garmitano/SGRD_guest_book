@@ -29,10 +29,10 @@ public class Registry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRegistry;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private LocalDate checkin;
     private Long idRoom;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private LocalDate checkout;
     private Long idGuestType;
     private Long idEmployee;

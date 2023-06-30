@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SGRD</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="">SGRD</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="conteiner text-center">
+        <div>
+            <h1>Sistema de gestion para RD</h1>
+            <h3>Editar persona</h3>
+        </div>
+        <form th:action="@{/persons/{id}(id=${person.idPerson})}" th:object="${person}" method="post"
+            style="max-width:600px; margin: 0 auto;">
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-4">Dni:</label>
+                    <div>
+                        <input type="text" th:field="*{dni}" class="form-control" required>
+                    </div>
+                    <label class="col-form-label col-sm-4">Nombre:</label>
+                    <div>
+                        <input type="text" th:field="*{fullName}" class="form-control" required>
+                    </div>
+                    <label class="col-form-label col-sm-4">Localidad:</label>
+                    <div>
+                        <input type="text" th:field="*{town}" class="form-control" required>
+                    </div>
+                    <label class="col-form-label col-sm-4">Provincia:</label>
+                    <div>
+                        <input type="text" th:field="*{province}" class="form-control">
+                    </div>
+                    <label class="col-form-label col-sm-4">Pais:</label>
+                    <div>
+                        <input type="text" th:field="*{country}" class="form-control">
+                    </div>
+                    <label class="col-form-label col-sm-4">Celular:</label>
+                    <div>
+                        <input type="text" th:field="*{phone}" class="form-control">
+                    </div>
+                    <label class="col-form-label col-sm-4">Email:</label>
+                    <div>
+                        <input type="text" th:field="*{email}" class="form-control">
+                    </div>
+                    <label class="col-form-label col-sm-4">Fecha de nacimiento:</label>
+                    <div>
+                        <input type="date" th:field="*{birthdate}" class="form-control">
+                    </div>
+                </div>
+                <div class="text-center p">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -24,7 +24,7 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRoom;
-    private Long idRoomType;
+    private int idRoomType;
     // TODO ver enum de estados
     private String state;
     private String detail;

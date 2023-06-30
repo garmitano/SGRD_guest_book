@@ -26,6 +26,12 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Table(name = "PERSONAS")
 public class Person {
+    public Person(int dni, String fullName, String town) {
+        this.dni = dni;
+        this.fullName = fullName;
+        this.town = town;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPerson;
