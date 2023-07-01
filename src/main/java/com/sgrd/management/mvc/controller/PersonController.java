@@ -3,13 +3,11 @@ package com.sgrd.management.mvc.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.sgrd.management.model.Person;
 import com.sgrd.management.service.implementation.IPersonService;
 
@@ -26,7 +24,7 @@ public class PersonController {
     }
 
     @GetMapping("/persons/new")
-    public String addPerson(Model model) {
+    public String showFormNewPerson(Model model) {
         Person person = new Person();
         model.addAttribute("person", person);
         return "./persons/create_person";
@@ -55,7 +53,7 @@ public class PersonController {
         return "redirect:/persons";
     }
 
-    @GetMapping("/persons/{id}")
+    @GetMapping("/persons/delete/{id}")
     public String deletePerson(@PathVariable Long id) {
         service.deletePerson(id);
         return "redirect:/persons";

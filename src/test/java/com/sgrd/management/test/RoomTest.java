@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.sgrd.management.model.Room;
+import com.sgrd.management.model.Enum.RoomStateEnum;
 import com.sgrd.management.repository.IRoomRepository;
 
 @DataJpaTest
@@ -21,7 +22,7 @@ public class RoomTest {
 
     @Test
     public void saveRoom() {
-        Room room = new Room(null, 1, "ocupada", "algo");
+        Room room = new Room(null, 2, 1, RoomStateEnum.OCUPADA, "ver");
 
         repository.save(room);
 

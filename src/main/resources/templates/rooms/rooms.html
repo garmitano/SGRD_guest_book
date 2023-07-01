@@ -30,41 +30,32 @@
             <h1>Sistema de gestion para RD</h1>
         </div>
         <div class="container text-center">
-            <h2>Lista de personas</h2>
+            <h2>Lista de habitaciones</h2>
             <div>
                 <br />
                 <div class="table-responsive-lg">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">DNI</th>
-                                <th scope="col">Nombre completo</th>
-                                <th scope="col">Ciudad</th>
-                                <th scope="col">Provincia</th>
-                                <th scope="col">Pais</th>
-                                <th scope="col">Celular</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Fecha de Nac</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col">Numero</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Detalle</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="person : ${listPersons}">
-                                <td th:text="${person.dni}"></td>
-                                <td th:text="${person.fullName}"></td>
-                                <td th:text="${person.town}"></td>
-                                <td th:text="${person.province}"></td>
-                                <td th:text="${person.country}"></td>
-                                <td th:text="${person.phone}"></td>
-                                <td th:text="${person.email}"></td>
-                                <td th:text="${person.birthdate}"></td>
+                            <tr th:each="room : ${listRooms}">
+                                <td th:text="${room.nro_room}"></td>
+                                <td th:text="${room.idRoomType}"></td>
+                                <td th:text="${room.state}"></td>
+                                <td th:text="${room.detail}"></td>
                                 <td>
-                                    <a th:href="@{/persons/update/{id}(id=${person.idPerson})}" class="btn btn-info"><i
+                                    <a th:href="@{/rooms/update/{id}(id=${room.idRoom})}" class="btn btn-info"><i
                                             class="fas fa-pen"></i>
                                     </a>
 
-                                    <a th:href="@{/persons/delete/{id}(id=${person.idPerson})}"
-                                        class="btn btn-danger"><i class="fas fa-eraser"></i></a>
+                                    <a th:href="@{/rooms/delete/{id}(id=${room.idRoom})}" class="btn btn-danger"><i
+                                            class="fas fa-eraser"></i></a>
                                 </td>
                             </tr>
                         </tbody>
