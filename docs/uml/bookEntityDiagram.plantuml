@@ -1,6 +1,6 @@
-@startuml ClassDetail
+@startuml entityDetail
 
-class Person{
+entity Person{
     - Long idPerson
     - int dni
     - String fullName
@@ -12,33 +12,26 @@ class Person{
     - String birthdate
 }
 
-class GuestType{
+entity GuestType{
     - Long idGuestType
     - String type
     - String detail
 }
 
-class Employee{
+entity Employee{
     - Long idEmployee
     - Long idPerson
     - String type
 }
 
-class RoomType{
+entity RoomType{
     - Long idRoomType
     - String type
     - int price
     - String detail
 }
 
-class Room{
-    - Long idRoom
-    - Long idRoomType
-    - String state
-    - String detail
-}
-
-class Payment{
+entity Payment{
     - Long idPayment
     - int amount
     - String method
@@ -46,23 +39,8 @@ class Payment{
     - Long creditCard
 }
 
-class Registry{
-    - Long idRegistry
-    - localdate checkinx
-    - Long idRoom
-    - localdate checkout
-    - Long idGuestType
-    - Long idEmployee
-    - Long idPayment
-    - String numTicket
-}
 
-class RegistryDetail{
-    - Long idRegistry
-    - Long idPerson
-}
-
-class Book{
+entity Book{
     - Long idBook
     - localdate checkin
     - Long idRoomType
@@ -73,5 +51,9 @@ class Book{
     - String detail
 }
 
-
+Book -left- Person
+Book -right- RoomType
+Book -- Employee
+Payment }-- Book
+Book --- GuestType
 @enduml

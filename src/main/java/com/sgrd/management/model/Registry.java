@@ -29,14 +29,25 @@ public class Registry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRegistry;
+
     @Temporal(TemporalType.DATE)
     private LocalDate checkin;
-    private Long idRoom;
+
+    // @OneToOne(mappedBy = "regitry")
+    // private Room room;
+
     @Temporal(TemporalType.DATE)
     private LocalDate checkout;
-    private Long idGuestType;
-    private Long idEmployee;
-    private Long idPayment;
+
+    // @OneToOne(mappedBy = "regitry")
+    // private GuestType guestType;
+
+    // @OneToOne(mappedBy = "regitry")
+    // private Employee employee;
+
+    // @OneToMany(mappedBy = "registry")
+    // private List<Payment> payment;
+
     @Column(length = 8)
     private String numTicket;
 }

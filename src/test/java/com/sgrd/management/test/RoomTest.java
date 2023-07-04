@@ -22,7 +22,7 @@ public class RoomTest {
 
     @Test
     public void saveRoom() {
-        Room room = new Room(null, 2, 1, RoomStateEnum.OCUPADA, "ver");
+        Room room = new Room(null, 0, null, null, null, null);
 
         repository.save(room);
 

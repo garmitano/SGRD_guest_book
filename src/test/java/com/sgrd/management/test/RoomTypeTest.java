@@ -22,10 +22,9 @@ public class RoomTypeTest {
 
     @Test
     public void saveRoom() {
-        RoomType roomType = new RoomType(null, RoomTypeEnum.ESPECIAL, 2.22, "ALGO");
+        RoomType roomType = new RoomType(null, null, 0, null, null);
 
         repository.save(roomType);
-        
 
         repository.flush();
 

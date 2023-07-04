@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -26,11 +28,6 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Table(name = "PERSONAS")
 public class Person {
-    public Person(int dni, String fullName, String town) {
-        this.dni = dni;
-        this.fullName = fullName;
-        this.town = town;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,4 +49,13 @@ public class Person {
     @Column(length = 8)
     @Temporal(TemporalType.DATE)
     private LocalDate birthdate;
+
+    @OneToOne(mappedBy = "person")
+    private Employee employee;
+
+    public Person(int dni, String fullName, String town) {
+        this.dni = dni;
+        this.fullName = fullName;
+        this.town = town;
+    }
 }

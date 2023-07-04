@@ -27,25 +27,29 @@
     <div class="conteiner text-center">
         <div>
             <h1>Sistema de gestion para RD</h1>
-            <h3>Editar habitacion</h3>
+            <h3>Agregar tipo de habitacion</h3>
         </div>
-        <form th:action="@{/rooms/{id}(id=${room.idRoom})}" th:object="${room}" method="post"
+        <form th:action="@{/rooms/type/save}" th:object="${roomType}" method="post"
             style="max-width:600px; margin: 0 auto;">
-            <div class="card-body">
+            <div class="m-3">
                 <div class="form-group row">
-                    <label class="col-form-label col-sm-4">Nro:</label>
+
+                    <label class="col-form-label col-sm-6">Tipo:</label>
                     <div>
-                        <input type="text" th:field="*{nro_room}" class="form-control" required>
+                        <select th:field="*{type}" class="form-control">
+                            <th:block th:each="types : ${T(com.sgrd.management.model.Enum.RoomTypeEnum).values()}">
+                                <option th:value="${types}" th:text="${types}">
+                                </option>
+                            </th:block>
+                        </select>
                     </div>
-                    <label class="col-form-label col-sm-4">Tipo:</label>
+
+                    <label class="col-form-label col-sm-6">Precio:</label>
                     <div>
-                        <input type="text" th:field="*{type.type}" class="form-control" required>
+                        <input type="text" th:field="*{price}" class="form-control">
                     </div>
-                    <label class="col-form-label col-sm-4">Estado:</label>
-                    <div>
-                        <input type="text" th:field="*{state}" class="form-control" required>
-                    </div>
-                    <label class="col-form-label col-sm-4">Detalle:</label>
+
+                    <label class="col-form-label col-sm-6">Detalle:</label>
                     <div>
                         <input type="text" th:field="*{detail}" class="form-control">
                     </div>
@@ -55,6 +59,7 @@
                 </div>
             </div>
         </form>
+
     </div>
     </div>
 </body>

@@ -1,5 +1,7 @@
 package com.sgrd.management.mvc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,15 +10,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.sgrd.management.model.Person;
 import com.sgrd.management.model.Room;
+import com.sgrd.management.model.RoomType;
 import com.sgrd.management.service.implementation.IRoomService;
+import com.sgrd.management.service.implementation.IRoomTypeService;
 
 @Controller
 public class RoomController {
 
     @Autowired
     private IRoomService service;
+
+    @Autowired
+    private IRoomTypeService typeService;
 
     @GetMapping("/rooms")
     public String listAllRooms(Model model) {
@@ -27,7 +33,10 @@ public class RoomController {
     @GetMapping("/rooms/new")
     public String showFormNewRoom(Model model) {
         Room room = new Room();
+        List<RoomType> listRoomTypes = typeService.listAllRoomTypes();
+
         model.addAttribute("room", room);
+        model.addAttribute("listRoomTypes", listRoomTypes);
         return "rooms/create_room";
     }
 

@@ -46,7 +46,7 @@
                         <tbody>
                             <tr th:each="room : ${listRooms}">
                                 <td th:text="${room.nro_room}"></td>
-                                <td th:text="${room.idRoomType}"></td>
+                                <td th:text="${room.type.type}"></td>
                                 <td th:text="${room.state}"></td>
                                 <td th:text="${room.detail}"></td>
                                 <td>

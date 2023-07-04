@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -32,7 +33,9 @@ public class GuestType {
     @Column(length = 30, nullable = false)
     @Enumerated(value = EnumType.STRING)
     private GuestTypeEnum type;
-    // TODO ver si es un texto mas largo
     @Column(length = 100)
     private String detail;
+
+    // @OneToOne
+    // private Registry registry;
 }

@@ -32,24 +32,32 @@
         <form th:action="@{/rooms/save}" th:object="${room}" method="post" style="max-width:600px; margin: 0 auto;">
             <div class="m-3">
                 <div class="form-group row">
-                    <label class="col-form-label col-sm-4">Numero de habitacion:</label>
+                    <label class="col-form-label col-sm-6">Numero de habitacion:</label>
                     <div>
                         <input type="text" th:field="*{nro_room}" class="form-control" required>
                     </div>
-                    <label class="col-form-label col-sm-4">Tipo:</label>
+
+                    <label class="col-form-label col-sm-6">Tipo:</label>
                     <div>
-                        <input type="text" th:field="*{idRoomType}" class="form-control" required>
-                    </div>
-                    <label class="col-form-label col-sm-4">Estado:</label>
-                    <div>
-                        <!-- <input type="text" th:field="*{state}" class="form-control" required> -->
-                        <select th:field="*{state}">
-                            <option th:each="state : ${T(com.sgrd.management.model.Enum.RoomStateEnum).values()}"
-                                th:value="${state}" th:text="${state}">
-                            </option>
+                        <select th:field="*{type}" class="form-control" required>
+                            <th:block th:each="type : ${listRoomTypes}">
+                                <option th:text="${type.type}" th:value="${type.idRoomType}">
+                                </option>
+                            </th:block>
                         </select>
                     </div>
-                    <label class="col-form-label col-sm-4">Detalle:</label>
+
+                    <label class="col-form-label col-sm-6">Estado:</label>
+                    <div>
+                        <select th:field="*{state}" class="form-control">
+                            <th:block th:each="state : ${T(com.sgrd.management.model.Enum.RoomStateEnum).values()}">
+                                <option th:value="${state}" th:text="${state}">
+                                </option>
+                            </th:block>
+                        </select>
+                    </div>
+
+                    <label class="col-form-label col-sm-6">Detalle:</label>
                     <div>
                         <input type="text" th:field="*{detail}" class="form-control">
                     </div>

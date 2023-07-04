@@ -21,8 +21,7 @@ public class PersonTest {
 
     @Test
     public void savePerson() {
-        Person person = new Person(null, 25173444, "Gustavo Armitano", "Capital", "Catamarca", "Argentina",
-                "3837643832", "erto@erto.com", null);
+        Person person = new Person(null, 0, null, null, null, null, null, null, null, null);
 
         repository.save(person);
 
