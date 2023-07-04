@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -27,7 +29,8 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Table(name = "PERSONAS")
-public class Person {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,9 +52,6 @@ public class Person {
     @Column(length = 8)
     @Temporal(TemporalType.DATE)
     private LocalDate birthdate;
-
-    @OneToOne(mappedBy = "person")
-    private Employee employee;
 
     public Person(int dni, String fullName, String town) {
         this.dni = dni;
