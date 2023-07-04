@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -50,8 +51,8 @@ public class Person {
     @Temporal(TemporalType.DATE)
     private LocalDate birthdate;
 
-    @OneToOne(mappedBy = "person")
-    private Employee employee;
+    // @OneToOne(mappedBy = "person")
+    // private Employee employee;
 
     public Person(int dni, String fullName, String town) {
         this.dni = dni;

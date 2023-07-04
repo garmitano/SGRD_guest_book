@@ -35,9 +35,9 @@ public class Employee {
     @Enumerated(value = EnumType.STRING)
     private EmployeeTypeEnum type;
 
-    @OneToOne
-    @JoinColumn(name = "idPerson")
-    private Person person;
+    // @OneToOne
+    // @JoinColumn(name = "idPerson")
+    // private Person person;
 
     // @OneToOne
     // private Registry registry;
