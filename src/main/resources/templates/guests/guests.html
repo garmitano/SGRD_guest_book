@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{template2.html::header}"></div>
+
+<body>
+    <div th:insert="~{template2.html::navbar}"></div>
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div th:insert="~{template2.html::sidebar_left}"></div>
+            <div class="col-sm-10">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Nombre completo</th>
+                            <th scope="col">Ciudad</th>
+                            <th scope="col">Provincia</th>
+                            <th scope="col">Pais</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="guest : ${listGuests}" class="text-left">
+                            <td th:text="${guest.dni}"></td>
+                            <td th:text="${guest.fullName}"></td>
+                            <td th:text="${guest.town}"></td>
+                            <td th:text="${guest.province}"></td>
+                            <td th:text="${guest.country}"></td>
+                            <td th:text="${guest.type}"></td>
+
+
+                            <td>
+                                <a th:href="@{/guests/update/{id}(id=${guest.idPerson})}" class="btn btn-info"><i
+                                        class="fas fa-pen"></i>
+                                </a>
+                                <a th:href="@{/guests/delete/{id}(id=${guest.idPerson})}" class="btn btn-danger"><i
+                                        class="fas fa-eraser"></i></a>
+                                <a th:href="@{/guests/info/{id}(id=${guest.idPerson})}" class="btn btn-danger"><i
+                                        class="fas fa-info"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div th:insert="~{template2.html::footer}"></div>
+</body>
+
+</html>

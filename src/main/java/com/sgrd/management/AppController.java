@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AppController {
     @GetMapping("")
     public String viewIndex() {
-        return "index";
+        return "index2";
     }
+
+    // @GetMapping("/index2")
+    // public String viewNewWeb() {
+    // return "index2";
+    // }
 }

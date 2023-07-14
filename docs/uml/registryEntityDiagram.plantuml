@@ -1,6 +1,6 @@
 @startuml entityDetail
 
-entity Person{
+abstract Person{
     - Long idPerson
     - int dni
     - String fullName
@@ -12,16 +12,16 @@ entity Person{
     - String birthdate
 }
 
-entity GuestType{
-    - Long idGuestType
+entity Guest{
+    - Long idPerson
     - GuestTypeEnum type
     - String detail
 }
 
 entity Employee{
-    - Long idEmployee
     - Long idPerson
     - EmployeeTypeEnum type
+    - String detail
 }
 
 entity RoomType{
@@ -34,8 +34,14 @@ entity RoomType{
 entity Room{
     - Long idRoom
     - RoomType type
-    - String state
+    - RoomStateEnum state
     - String detail
+}
+
+entity RoomType{
+    - idRoomType
+    - type
+    - detail
 }
 
 entity Payment{
@@ -48,18 +54,19 @@ entity Payment{
 
 entity Registry{
     - Long idRegistry
-    - localdate checkinx
+    - localdate checkin
     - Long idRoom
     - localdate checkout
-    - Long idGuestType
+    - Long idGuest
     - Long idEmployee
     - Long idPayment
     - String numTicket
 }
 
+
 class RegistryDetail{
     - Long idRegistry
-    - Long idPerson
+    - Long idGuest
 }
 
 enum EmployeeTypeEnum{
@@ -92,18 +99,28 @@ enum RoomTypeEnum{
     ESPECIAL
 }
 
-Person "n" }-left- "1" RegistryDetail
-Person -- Employee
+enum RoomStateEnum{
+    LIBRE
+    OCUPADA
+    RESERVADA
+    EN_MANTENIMIENTO
+}
 
-Room -- RoomType
+Registry "1" *-down- "1" RegistryDetail
+Registry "1" *-- "1" Room
+Payment "n" }-left-* "1" Registry
 
-Registry -right- RegistryDetail
-Registry -left- Room
-Registry -up- GuestType
-Payment "n" }-- "1" Registry
-Registry -- Employee
+Room "1" *-- "1" RoomType
+
+RegistryDetail "1" *--{ "n" Guest
+Registry "1" *-- "1" Employee
+
+Person <|-- Guest
+Person <|-- Employee
+
 Employee -- EmployeeTypeEnum
-GuestType -left- GuestTypeEnum
+Guest -- GuestTypeEnum
 RoomType -- RoomTypeEnum
+Room -left- RoomStateEnum
 
 @enduml
