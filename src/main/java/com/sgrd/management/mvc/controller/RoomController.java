@@ -14,19 +14,20 @@ import com.sgrd.management.model.Room;
 import com.sgrd.management.model.RoomType;
 import com.sgrd.management.service.implementation.IRoomService;
 import com.sgrd.management.service.implementation.IRoomTypeService;
+import com.sgrd.management.service.implementation.RoomServiceImpl;
 
 @Controller
 public class RoomController {
 
     @Autowired
-    private IRoomService service;
+    private RoomServiceImpl service;
 
     @Autowired
     private IRoomTypeService typeService;
 
     @GetMapping("/rooms")
-    public String listAllRooms(Model model) {
-        model.addAttribute("listRooms", service.listAllRoom());
+    public String listAllRooms(Model model) throws Exception {
+        model.addAttribute("listRooms", service.listAll());
         return "rooms/rooms";
     }
 
@@ -41,20 +42,20 @@ public class RoomController {
     }
 
     @PostMapping("/rooms/save")
-    public String savePerson(@ModelAttribute("room") Room room) {
-        service.addNewRoom(room);
+    public String savePerson(@ModelAttribute("room") Room room) throws Exception {
+        service.addNewOne(room);
         return "redirect:/rooms";
     }
 
     @GetMapping("/rooms/update/{id}")
-    public String showFormNewRoom(@PathVariable Long id, Model model) {
-        model.addAttribute("room", service.getRoomById(id));
+    public String showFormNewRoom(@PathVariable Long id, Model model) throws Exception {
+        model.addAttribute("room", service.getOneById(id));
         return "rooms/update_room";
     }
 
     @PostMapping("/rooms/{id}")
-    public String updateRoom(@PathVariable Long id, @ModelAttribute("room") Room room, Model model) {
-        Room currentRoom = service.getRoomById(id);
+    public String updateRoom(@PathVariable Long id, @ModelAttribute("room") Room room, Model model) throws Exception {
+        Room currentRoom = service.getOneById(id);
         currentRoom.setIdRoom(id);
         currentRoom.setNro_room(room.getNro_room());
         currentRoom.setState(room.getState());
@@ -64,8 +65,8 @@ public class RoomController {
     }
 
     @GetMapping("/rooms/delete/{id}")
-    public String deleteRoom(@PathVariable Long id) {
-        service.deleteRoom(id);
+    public String deleteRoom(@PathVariable Long id) throws Exception {
+        service.deleteOne(id);
         return "redirect:/rooms";
     }
 }

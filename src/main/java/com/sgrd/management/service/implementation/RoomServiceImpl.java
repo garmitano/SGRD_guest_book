@@ -8,35 +8,66 @@ import org.springframework.stereotype.Service;
 import com.sgrd.management.model.Room;
 import com.sgrd.management.repository.IRoomRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
-public class RoomServiceImpl implements IRoomService {
+public class RoomServiceImpl implements IServiceBase<Room> {
 
     @Autowired
     private IRoomRepository repository;
 
     @Override
-    public List<Room> listAllRoom() {
-        return repository.findAll();
+    @Transactional
+    public List<Room> listAll() throws Exception {
+        try {
+            List<Room> rooms = repository.findAll();
+            return rooms;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
-    public Room addNewRoom(Room room) {
-        return repository.save(room);
+    @Transactional
+    public Room addNewOne(Room entity) throws Exception {
+        try {
+            return repository.save(entity);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
-    public Room getRoomById(Long id) {
-        return repository.getReferenceById(id);
+    @Transactional
+    public Room getOneById(Long id) throws Exception {
+        try {
+            return repository.getReferenceById(id);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
-    public Room updateRoom(Room room) {
-        return repository.save(room);
+    @Transactional
+    public Room updateOne(Room entity, Long id) throws Exception {
+        try {
+            return repository.save(entity);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
-    public void deleteRoom(Long id) {
-        repository.deleteById(id);
+    @Transactional
+    public void deleteOne(Long id) throws Exception {
+        try {
+            repository.deleteById(id);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public void updateRoom(Room currentRoom) {
     }
 
 }
