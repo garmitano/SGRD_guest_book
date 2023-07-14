@@ -9,6 +9,11 @@ public class AppController {
     // al inicio
     @GetMapping("")
     public String viewIndex() {
-        return "index";
+        return "index2";
     }
+
+    // @GetMapping("/index2")
+    // public String viewNewWeb() {
+    // return "index2";
+    // }
 }

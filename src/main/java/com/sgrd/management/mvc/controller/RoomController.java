@@ -26,13 +26,8 @@ public class RoomController {
 
     @GetMapping("/rooms")
     public String listAllRooms(Model model) throws Exception {
-        try {
-            model.addAttribute("listRooms", service.listAll());
-            return "rooms/rooms";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        }
+        model.addAttribute("listRooms", service.listAll());
+        return "rooms/rooms";
     }
 
     @GetMapping("/rooms/new")
@@ -51,51 +46,31 @@ public class RoomController {
     }
 
     @PostMapping("/rooms/save")
-    public String savePerson(@ModelAttribute("room") Room room, Model model) throws Exception {
-        try {
-            service.addNewOne(room);
-            return "redirect:/rooms";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        }
+    public String savePerson(@ModelAttribute("room") Room room) throws Exception {
+        service.addNewOne(room);
+        return "redirect:/rooms";
     }
 
     @GetMapping("/rooms/update/{id}")
     public String showFormNewRoom(@PathVariable Long id, Model model) throws Exception {
-        try {
-            model.addAttribute("room", service.getOneById(id));
-            return "rooms/update_room";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        }
+        model.addAttribute("room", service.getOneById(id));
+        return "rooms/update_room";
     }
 
     @PostMapping("/rooms/{id}")
     public String updateRoom(@PathVariable Long id, @ModelAttribute("room") Room room, Model model) throws Exception {
-        try {
-            Room currentRoom = service.getOneById(id);
-            currentRoom.setIdRoom(id);
-            currentRoom.setNro_room(room.getNro_room());
-            currentRoom.setState(room.getState());
-            currentRoom.setDetail(room.getDetail());
-            service.updateOne(currentRoom, id);
-            return "redirect:/rooms";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        }
+        Room currentRoom = service.getOneById(id);
+        currentRoom.setIdRoom(id);
+        currentRoom.setNro_room(room.getNro_room());
+        currentRoom.setState(room.getState());
+        currentRoom.setDetail(room.getDetail());
+        service.updateOne(currentRoom, id);
+        return "redirect:/rooms";
     }
 
     @GetMapping("/rooms/delete/{id}")
-    public String deleteRoom(@PathVariable Long id, Model model) throws Exception {
-        try {
-            service.deleteOne(id);
-            return "redirect:/rooms";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        }
+    public String deleteRoom(@PathVariable Long id) throws Exception {
+        service.deleteOne(id);
+        return "redirect:/rooms";
     }
 }

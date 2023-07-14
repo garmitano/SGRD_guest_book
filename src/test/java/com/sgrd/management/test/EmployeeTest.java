@@ -22,7 +22,7 @@ public class EmployeeTest {
 
     @Test
     public void saveEmployee() {
-        Employee employee = new Employee(null, null, null, null);
+        Employee employee = new Employee();
 
         repository.save(employee);
 

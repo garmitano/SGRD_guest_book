@@ -58,13 +58,8 @@ public class RoomServiceImpl implements IServiceBase<Room> {
     }
 
     @Override
-    @Transactional
-    public void deleteOne(Long id) throws Exception {
-        try {
-            repository.deleteById(id);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public void deleteOne(Long id) {
+        repository.deleteById(id);
     }
 
 }
