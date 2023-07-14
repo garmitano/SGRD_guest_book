@@ -15,13 +15,12 @@ import com.sgrd.management.repository.IPersonRepository;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 // @Rollback(false)
-public class PersonTest {
+public class RegistryTest {
     @Autowired
     private IPersonRepository repository;
 
     @Test
     public void savePerson() {
-        Person person = new Person(null, 0, null, null, null, null, null, null, null, null);
 
         repository.save(person);
 

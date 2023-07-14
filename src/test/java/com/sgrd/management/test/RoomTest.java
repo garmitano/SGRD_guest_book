@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.sgrd.management.model.Room;
-import com.sgrd.management.model.Enum.RoomStateEnum;
 import com.sgrd.management.repository.IRoomRepository;
 
 @DataJpaTest
