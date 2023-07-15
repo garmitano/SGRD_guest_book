@@ -40,9 +40,16 @@ public class Room {
     private String detail;
 
     @ManyToOne
-    @JoinColumn(name = "idRoomType")
+    @JoinColumn(name = "fk_roomType")
     private RoomType type;
 
-    @OneToOne
+    @OneToOne(mappedBy = "room")
     private Registry registry;
+
+    public Room(int nro_room, RoomStateEnum state, String detail) {
+        this.nro_room = nro_room;
+        this.state = state;
+        this.detail = detail;
+    }
+
 }

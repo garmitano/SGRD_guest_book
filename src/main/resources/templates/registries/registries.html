@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{template2.html::header}"></div>
+
+<body>
+    <div th:insert="~{template2.html::navbar}"></div>
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div th:insert="~{template2.html::sidebar_left}"></div>
+            <div class="col-sm-10">
+                <h2>Registro de pasajeros</h2>
+                <div>
+                    <br />
+                    <div class="table-responsive-lg">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col-2">CheckIn</th>
+                                    <th scope="col-2">Habitacion</th>
+                                    <th scope="col-2">Empleado</th>
+                                    <th scope="col-2">Factura</th>
+                                    <th scope="col-2">CheckOut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="registry : ${listRegistries}" class="text-left">
+                                    <td th:text="${registry.checkin}" class="col-sm-1"></td>
+                                    <td th:text="${registry.room.nro_room}" class="col-sm-1"></td>
+                                    <td th:text="${registry.employee}" class="col-sm-1"></td>
+                                    <td th:text="${registry.numTicket}" class="col-sm-1"></td>
+                                    <td th:text="${registry.checkout}" class="col-sm-1"></td>
+
+                                    <!-- <td>
+                                        <a th:href="@{/rooms/update/{id}(id=${room.idRoom})}" class="btn btn-info"><i
+                                                class="fas fa-pen"></i>
+                                        </a>
+        
+                                        <a th:href="@{/rooms/delete/{id}(id=${room.idRoom})}" class="btn btn-danger"><i
+                                                class="fas fa-eraser"></i></a>
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:insert="~{template2.html::footer}"></div>
+</body>
+
+</html>

@@ -40,8 +40,13 @@ public class RoomType {
     private double price;
     @Column(length = 45)
     private String detail;
-    private String nro_windows;
     @OneToMany(mappedBy = "type", cascade = CascadeType.REMOVE)
     private List<Room> rooms;
+
+    public RoomType(RoomTypeEnum type, double price, String detail) {
+        this.type = type;
+        this.price = price;
+        this.detail = detail;
+    }
 
 }
