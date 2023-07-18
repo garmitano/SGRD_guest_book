@@ -1,13 +1,16 @@
 package com.sgrd.management.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.sgrd.management.model.Enum.EmployeeTypeEnum;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -22,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name = "EMPLEADOS")
+@Table(name = "empleados")
 @PrimaryKeyJoinColumn(referencedColumnName = "idPerson")
 public class Employee extends Person {
 
@@ -30,6 +33,12 @@ public class Employee extends Person {
     @Enumerated(value = EnumType.STRING)
     private EmployeeTypeEnum type;
 
-    @OneToOne(mappedBy = "employee")
-    private Registry registry;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Registry> registry = new ArrayList<Registry>();
+
+    public Employee(int dni, String fullName, EmployeeTypeEnum type) {
+        super(dni, fullName);
+        this.type = type;
+    }
+
 }

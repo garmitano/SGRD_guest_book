@@ -10,10 +10,10 @@ services:
             - DATABASE_HOST=127.0.0.1
             - POSTGRES_USER=root
             - POSTGRES_PASSWORD=1234
-            - POSTGRES_DB=sgrd
+            - POSTGRES_DB=sgrd_db
         volumes:
-            - postgres_vol_sgrd:/var/lib/postgresql/data
+            - postgres_vol_sgrd_db:/var/lib/postgresql/data
 
 volumes:
-    postgres_vol_sgrd:
+    postgres_vol_sgrd_db:
         driver: local

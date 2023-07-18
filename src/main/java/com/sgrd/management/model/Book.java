@@ -24,7 +24,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name = "RESERVAS")
+@Table(name = "reservas")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

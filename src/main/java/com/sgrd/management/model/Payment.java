@@ -20,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name = "PAGOS")
+@Table(name = "pagos")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

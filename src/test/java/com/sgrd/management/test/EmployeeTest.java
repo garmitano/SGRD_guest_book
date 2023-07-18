@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.sgrd.management.model.Employee;
+import com.sgrd.management.model.Enum.EmployeeTypeEnum;
 import com.sgrd.management.repository.IEmployeeRepository;
 
 @DataJpaTest
@@ -22,13 +23,18 @@ public class EmployeeTest {
 
     @Test
     public void saveEmployee() {
+
         Employee employee = new Employee();
+
+        employee.setDni(11172243);
+        employee.setFullName("GUSTAVO ARMITANO");
+        employee.setType(EmployeeTypeEnum.ADMINISTRADOR);
 
         repository.save(employee);
 
         repository.flush();
 
-        assertEquals(1, repository.findAll().size());
+        assertEquals(2, repository.findAll().size());
 
     }
 

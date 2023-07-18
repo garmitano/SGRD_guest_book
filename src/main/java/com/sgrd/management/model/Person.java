@@ -26,7 +26,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name = "PERSONAS")
+@Table(name = "personas")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person {
 
@@ -50,5 +50,10 @@ public abstract class Person {
     @Column(length = 8)
     @Temporal(TemporalType.DATE)
     private LocalDate birthdate;
+
+    public Person(int dni, String fullName) {
+        this.dni = dni;
+        this.fullName = fullName;
+    }
 
 }
