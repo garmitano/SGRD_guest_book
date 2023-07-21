@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sgrd.management.model.Registry;
+import com.sgrd.management.model.RegistryDetail;
 import com.sgrd.management.repository.IRegistryRepository;
 
 import jakarta.transaction.Transactional;
@@ -54,4 +55,13 @@ public class RegistryServiceImpl implements IServiceBase<Registry> {
         throw new UnsupportedOperationException("Unimplemented method 'deleteOne'");
     }
 
+    public Registry addNewDetail(List<RegistryDetail> registryDetails) throws Exception {
+        try {
+            // TODO hacer for para guardar los guest de la lista recibida
+
+            return null;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

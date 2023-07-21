@@ -19,7 +19,8 @@
                                     <th scope="col-2">CheckIn</th>
                                     <th scope="col-2">Habitacion</th>
                                     <th scope="col-2">Empleado</th>
-                                    <th scope="col-2">Factura</th>
+                                    <th scope="col-2">Pasajero</th>
+
                                     <th scope="col-2">CheckOut</th>
                                 </tr>
                             </thead>
@@ -27,7 +28,8 @@
                                 <tr th:each="registry : ${listRegistries}" class="text-left">
                                     <td th:text="${registry.checkin}" class="col-sm-1"></td>
                                     <td th:text="${registry.room.nro_room}" class="col-sm-1"></td>
-                                    <td th:text="${registry.employee}" class="col-sm-1"></td>
+                                    <td th:text="${registry.employee.type}" class="col-sm-1"></td>
+
                                     <td th:text="${registry.numTicket}" class="col-sm-1"></td>
                                     <td th:text="${registry.checkout}" class="col-sm-1"></td>
 

@@ -13,30 +13,56 @@
 
             <div class="col-sm-8 text-center">
                 <div class="row">
-                    <form th:action=" @{/registries/save}" th:object="${registry}" method="post"
+                    <form th:action=" @{/registries/save}" th:object="${registryViewModel}" method="post"
                         style="max-width:400px; margin: 0 auto;">
 
                         <div class="col-2">
                             <label class="col-form-label">Checkin:
-                                <input type="date" th:field="*{checkin}" class="form-control" required></label>
+                                <input type="date" th:field="*{registry.checkin}" class="form-control" required></label>
                         </div>
 
                         <div class="col-2">
                             <label class="col-form-label">Habitacion:</label>
-                            <select th:field="*{room}" class="form-control">
+                            <select th:field="*{registry.room}" class="form-control">
                                 <th:block th:each="room : ${listRooms}">
-                                    <option th:text="${room.nro_room}" th:value="${room.idRoom}"></option>
+                                    <!-- TODO VER PORQUE NO HACE LA SELECCION CON LETRAS-->
+                                    <option th:if="${room.nro_room} >= 1" th:text="${room.state}"
+                                        th:value="${room.idRoom}"></option>
                                 </th:block>
                             </select>
                         </div>
-
-                        <div class="col-4">
-                            <label class="col-form-label">Numero de factura: <input type="text" th:field="*{numTicket}"
-                                    class="form-control" required></label>
+                        <div class="col-2">
+                            <label class="col-form-label">Pasajero1:</label>
+                            <!-- TODO ver thfield como conectar la lista de details con el service que lo guarde -->
+                            <!-- <select th:field="*{registryDetails}" class="form-control">
+                                <th:block th:each="guest : ${listGuests}">
+                                    <option th:text="${guest.fullName}" th:value="${guest.idPerson}"></option>
+                                </th:block>
+                            </select> -->
                         </div>
                         <div class="col-2">
-                            <label class="col-form-label">Checkin:
-                                <input type="date" th:field="*{checkout}" class="form-control" required></label>
+                            <label class="col-form-label">Pasajero2:</label>
+                            <select class="form-control">
+                                <th:block th:each="guest : ${listGuests}">
+                                    <option th:text="${guest.fullName}" th:value="${guest.idPerson}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">Numero de factura: <input type="text"
+                                    th:field="*{registry.numTicket}" class="form-control"></label>
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">Usuario:</label>
+                            <select th:field="*{registry.employee}" class="form-control">
+                                <th:block th:each="employee : ${listEmployees}">
+                                    <option th:text="${employee.type}" th:value="${employee.idPerson}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">Checkout:
+                                <input type="date" th:field="*{registry.checkout}" class="form-control"></label>
                         </div>
                         <div class="text-center p">
                             <button type="submit" class="btn btn-primary">Guardar</button>

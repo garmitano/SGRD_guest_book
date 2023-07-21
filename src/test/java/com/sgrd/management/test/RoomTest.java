@@ -14,7 +14,6 @@ import com.sgrd.management.model.RoomType;
 import com.sgrd.management.model.Enum.RoomStateEnum;
 import com.sgrd.management.model.Enum.RoomTypeEnum;
 import com.sgrd.management.repository.IRoomRepository;
-import com.sgrd.management.service.implementation.RoomServiceImpl;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -23,9 +22,6 @@ public class RoomTest {
 
     @Autowired
     private IRoomRepository repository;
-
-    @Autowired
-    private RoomServiceImpl roomServiceImpl;
 
     @Test
     public void saveRoom() {
