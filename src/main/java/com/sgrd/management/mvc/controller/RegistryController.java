@@ -43,7 +43,7 @@ public class RegistryController {
         try {
             RegistryViewModel registryViewModel = new RegistryViewModel();
             registryViewModel.setRegistry(new Registry());
-            registryViewModel.setRegistryDetails(new ArrayList<RegistryDetail>());
+            registryViewModel.setListIdGuest(new ArrayList<Long>());
 
             List<Guest> listGuests = guestService.listAllGuests();
             List<Room> listRooms = roomService.listAll();
@@ -66,6 +66,9 @@ public class RegistryController {
         // Procesar la información del registro y su detalle
         // Guardar en la base de datos, realizar cálculos, etc.
         service.addNewOne(registryViewModel.getRegistry());
+        // ver como guardar el listado de guest sacado de la viewModel y puesto en
+        // registryDetail
+        service.addDetails(registryViewModel.getListIdGuest(), registryViewModel.getRegistry());
 
         return "redirect:/registries";
     }

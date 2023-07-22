@@ -31,26 +31,47 @@
                                 </th:block>
                             </select>
                         </div>
+
                         <div class="col-2">
-                            <label class="col-form-label">Pasajero1:</label>
-                            <!-- TODO ver thfield como conectar la lista de details con el service que lo guarde -->
-                            <!-- <select th:field="*{registryDetails}" class="form-control">
+                            <label class="col-form-label">Pasajero[1]:</label>
+                            <select th:field="*{listIdGuest}" class="form-control">
                                 <th:block th:each="guest : ${listGuests}">
-                                    <option th:text="${guest.fullName}" th:value="${guest.idPerson}"></option>
+                                    <option th:text="${guest.dni+' - '+guest.fullName+' - '+guest.town}"
+                                        th:value="${guest.idPerson}">
+                                    </option>
                                 </th:block>
-                            </select> -->
-                        </div>
-                        <div class="col-2">
-                            <label class="col-form-label">Pasajero2:</label>
-                            <select class="form-control">
+                            </select>
+                            <label class="col-form-label">Pasajero[2]:</label>
+                            <select th:field="*{listIdGuest}" class="form-control">
                                 <th:block th:each="guest : ${listGuests}">
-                                    <option th:text="${guest.fullName}" th:value="${guest.idPerson}"></option>
+                                    <option th:text="${guest.dni+' - '+guest.fullName+' - '+guest.town}"
+                                        th:value="${guest.idPerson}">
+                                    </option>
+                                </th:block>
+                            </select>
+                            <label class="col-form-label">Pasajero[3]:</label>
+                            <select th:field="*{listIdGuest}" class="form-control">
+                                <th:block th:each="guest : ${listGuests}">
+                                    <option th:text="${guest.dni+' - '+guest.fullName+' - '+guest.town}"
+                                        th:value="${guest.idPerson}">
+                                    </option>
+                                </th:block>
+                            </select>
+                            <label class="col-form-label">Pasajero[4]:</label>
+                            <select th:field="*{listIdGuest}" class="form-control">
+                                <th:block th:each="guest : ${listGuests}">
+                                    <option th:text="${guest.dni+' - '+guest.fullName+' - '+guest.town}"
+                                        th:value="${guest.idPerson}">
+                                    </option>
                                 </th:block>
                             </select>
                         </div>
+
+
                         <div class="col-2">
-                            <label class="col-form-label">Numero de factura: <input type="text"
-                                    th:field="*{registry.numTicket}" class="form-control"></label>
+                            <label class="col-form-label">Numero de factura:
+                                <input type="text" th:field="*{registry.numTicket}" class="form-control">
+                            </label>
                         </div>
                         <div class="col-2">
                             <label class="col-form-label">Usuario:</label>
