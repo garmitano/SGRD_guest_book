@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.sgrd.management.model.Employee;
 import com.sgrd.management.model.Guest;
 import com.sgrd.management.model.Registry;
-import com.sgrd.management.model.RegistryDetail;
 import com.sgrd.management.model.Room;
 import com.sgrd.management.mvc.view.RegistryViewModel;
 import com.sgrd.management.service.implementation.EmployeeServiceImpl;
@@ -46,12 +45,12 @@ public class RegistryController {
             registryViewModel.setListIdGuest(new ArrayList<Long>());
 
             List<Guest> listGuests = guestService.listAllGuests();
-            List<Room> listRooms = roomService.listAll();
+            List<Room> listFreeRooms = roomService.listFree();
             List<Employee> listEmployees = employeeService.listAll();
 
             model.addAttribute("registryViewModel", registryViewModel);
             model.addAttribute("listGuests", listGuests);
-            model.addAttribute("listRooms", listRooms);
+            model.addAttribute("listFreeRooms", listFreeRooms);
             model.addAttribute("listEmployees", listEmployees);
             return "registries/create_registry";
         } catch (Exception e) {
@@ -63,13 +62,8 @@ public class RegistryController {
     @PostMapping("/registries/save")
     public String saveRegistry(@ModelAttribute("registryViewModel") RegistryViewModel registryViewModel)
             throws Exception {
-        // Procesar la información del registro y su detalle
-        // Guardar en la base de datos, realizar cálculos, etc.
         service.addNewOne(registryViewModel.getRegistry());
-        // ver como guardar el listado de guest sacado de la viewModel y puesto en
-        // registryDetail
         service.addDetails(registryViewModel.getListIdGuest(), registryViewModel.getRegistry());
-
         return "redirect:/registries";
     }
 }

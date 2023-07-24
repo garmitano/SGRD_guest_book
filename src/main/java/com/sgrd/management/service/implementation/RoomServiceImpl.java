@@ -27,6 +27,16 @@ public class RoomServiceImpl implements IServiceBase<Room> {
         }
     }
 
+    public List<Room> listFree() throws Exception {
+        try {
+            List<Room> freeRooms = repository.freeRooms();
+            return freeRooms;
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
     @Override
     @Transactional
     public Room addNewOne(Room entity) throws Exception {

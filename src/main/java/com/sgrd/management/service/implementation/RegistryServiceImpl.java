@@ -66,7 +66,6 @@ public class RegistryServiceImpl implements IServiceBase<Registry> {
 
     public Registry addDetails(List<Long> listIdGuest, Registry registry) throws Exception {
         try {
-            // TODO hacer for para guardar los guest de la lista recibida
             for (Long idGuest : listIdGuest) {
                 System.out.println(idGuest);
                 Guest tmpGuest = gRepository.getReferenceById(idGuest);

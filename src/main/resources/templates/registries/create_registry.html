@@ -24,10 +24,8 @@
                         <div class="col-2">
                             <label class="col-form-label">Habitacion:</label>
                             <select th:field="*{registry.room}" class="form-control">
-                                <th:block th:each="room : ${listRooms}">
-                                    <!-- TODO VER PORQUE NO HACE LA SELECCION CON LETRAS-->
-                                    <option th:if="${room.nro_room} >= 1" th:text="${room.state}"
-                                        th:value="${room.idRoom}"></option>
+                                <th:block th:each="room : ${listFreeRooms}">
+                                    <option th:text="${room.nro_room}" th:value="${room.idRoom}"></option>
                                 </th:block>
                             </select>
                         </div>
@@ -42,22 +40,6 @@
                                 </th:block>
                             </select>
                             <label class="col-form-label">Pasajero[2]:</label>
-                            <select th:field="*{listIdGuest}" class="form-control">
-                                <th:block th:each="guest : ${listGuests}">
-                                    <option th:text="${guest.dni+' - '+guest.fullName+' - '+guest.town}"
-                                        th:value="${guest.idPerson}">
-                                    </option>
-                                </th:block>
-                            </select>
-                            <label class="col-form-label">Pasajero[3]:</label>
-                            <select th:field="*{listIdGuest}" class="form-control">
-                                <th:block th:each="guest : ${listGuests}">
-                                    <option th:text="${guest.dni+' - '+guest.fullName+' - '+guest.town}"
-                                        th:value="${guest.idPerson}">
-                                    </option>
-                                </th:block>
-                            </select>
-                            <label class="col-form-label">Pasajero[4]:</label>
                             <select th:field="*{listIdGuest}" class="form-control">
                                 <th:block th:each="guest : ${listGuests}">
                                     <option th:text="${guest.dni+' - '+guest.fullName+' - '+guest.town}"
