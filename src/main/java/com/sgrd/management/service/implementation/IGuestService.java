@@ -11,6 +11,8 @@ public interface IGuestService {
 
     public Guest getGuestById(Long id);
 
+    public Guest getGuestByDni(Integer id);
+
     public Guest updateGuest(Guest guest);
 
     public void deleteGuest(Long id);

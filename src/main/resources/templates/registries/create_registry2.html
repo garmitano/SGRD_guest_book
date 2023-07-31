@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario con botón de tipo button y AJAX</title>
+    <!-- Incluye jQuery (asegúrate de ajustar la URL si estás utilizando una CDN diferente) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>Formulario con botón de tipo button y AJAX</h1>
+
+    <form>
+        <!-- Campos de entrada del formulario -->
+        <label for="dato">Pais:</label>
+        <input type="text" id="dato" placeholder="Ingrese un pais">
+
+        <!-- Botón de tipo button -->
+        <button type="button" id="botonEnviar">Enviar al Servidor</button>
+    </form>
+    <div id="resultados">
+
+    </div>
+    <script src="/src/main/resources/js/main.js"></script>
+</body>
+
+</html>

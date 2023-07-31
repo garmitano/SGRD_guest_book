@@ -1,54 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div th:insert="~{template2.html::header}"></div>
+<div th:insert="~{template.html::header}"></div>
 
 <body>
-    <div th:insert="~{template2.html::navbar}"></div>
+    <div th:insert="~{template.html::navbar}"></div>
 
     <div class="container-fluid text-center">
         <div class="row content">
 
-            <div th:insert="~{template2.html::sidebar_left}"></div>
+            <div th:insert="~{template.html::sidebar_left}"></div>
+            <div class="col-sm-10">
 
-            <div class="col-sm-8 text-center">
-                <div class="row">
-                    <form th:action=" @{/registries/save}" th:object="${registryViewModel}" method="post"
-                        style="max-width:400px; margin: 0 auto;">
 
-                        <div class="col-2">
-                            <label class="col-form-label">Checkin:
+                <form th:action=" @{/registries/save}" th:object="${registryViewModel}" method="post"
+                    style="max-width:600px; margin: 0 auto;">
+
+                    <div class="row">
+                        <div class="col-4 align-items-center ">
+                            <label class="col-auto">Checkin:
                                 <input type="date" th:field="*{registry.checkin}" class="form-control" required></label>
-                        </div>
 
-                        <div class="col-2">
-                            <label class="col-form-label">Habitacion:</label>
+                            <label class="col-auto">Habitacion:</label>
                             <select th:field="*{registry.room}" class="form-control">
                                 <th:block th:each="room : ${listFreeRooms}">
                                     <option th:text="${room.nro_room}" th:value="${room.idRoom}"></option>
                                 </th:block>
                             </select>
                         </div>
-
-                        <div class="col-2">
-                            <label class="col-form-label">Pasajero[1]:</label>
-                            <select th:field="*{listIdGuest}" class="form-control">
-                                <th:block th:each="guest : ${listGuests}">
-                                    <option th:text="${guest.dni+' - '+guest.fullName+' - '+guest.town}"
-                                        th:value="${guest.idPerson}">
-                                    </option>
-                                </th:block>
-                            </select>
-                            <label class="col-form-label">Pasajero[2]:</label>
-                            <select th:field="*{listIdGuest}" class="form-control">
-                                <th:block th:each="guest : ${listGuests}">
-                                    <option th:text="${guest.dni+' - '+guest.fullName+' - '+guest.town}"
-                                        th:value="${guest.idPerson}">
-                                    </option>
-                                </th:block>
-                            </select>
-                        </div>
-
 
                         <div class="col-2">
                             <label class="col-form-label">Numero de factura:
@@ -59,7 +38,8 @@
                             <label class="col-form-label">Usuario:</label>
                             <select th:field="*{registry.employee}" class="form-control">
                                 <th:block th:each="employee : ${listEmployees}">
-                                    <option th:text="${employee.type}" th:value="${employee.idPerson}"></option>
+                                    <option th:text="${employee.type}" th:value="${employee.idPerson}">
+                                    </option>
                                 </th:block>
                             </select>
                         </div>
@@ -67,19 +47,117 @@
                             <label class="col-form-label">Checkout:
                                 <input type="date" th:field="*{registry.checkout}" class="form-control"></label>
                         </div>
-                        <div class="text-center p">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                    </div>
 
+                    <!-- pedir un dni y comprobar que existe, y si es asi, cargar los datos en una columna de la tabla -->
+                    <br>
+                    <div class="col-2">
+
+                        <label for="name">DNI pasajero:</label>
+                        <input type="text" id="idGuest">
+                        <button type="button" id="addGuest">Agregar</button>
+
+                    </div>
+
+                    <div class="row">
+
+                        <table class="table" id="addGuestTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col-2">CheckIn</th>
+                                    <th scope="col-2">Habitacion</th>
+                                    <th scope="col-2">Empleado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-left">
+
+
+                                    <!-- <td>
+                                        <a th:href="@{/rooms/update/{id}(id=${room.idRoom})}" class="btn btn-info"><i
+                                                class="fas fa-pen"></i>
+                                        </a>
+        
+                                        <a th:href="@{/rooms/delete/{id}(id=${room.idRoom})}" class="btn btn-danger"><i
+                                                class="fas fa-eraser"></i></a>
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+
+            </form>
         </div>
+    </div>
     </div>
 
 
-    <div th:insert="~{template2.html::footer}"></div>
 
+    <div th:insert="~{template.html::footer}"></div>
+
+    <script>
+        const table = document.getElementById("addGuestTable");
+
+        // Aquí irá el código JavaScript con Fetch API
+        document.getElementById("addGuest").addEventListener("click", function () {
+            var id = document.getElementById("idGuest").value;
+            // Realiza la petición AJAX con Fetch API
+            fetch(
+                "http://localhost:8086/registries/new/new?id=" +
+                + encodeURIComponent(id), {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => {
+                    // Obtener el código de estado HTTP de la respuesta
+                    console.log("Estado de la respuesta:", response.status);
+
+                    // Obtener las cabeceras de la respuesta
+                    console.log("Cabeceras de la respuesta:", response.headers);
+
+                    // Obtener el contenido de la respuesta como JSON
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Datos recibidos:", data); // Aquí data debería ser un objeto JSON
+                    //TODO ordenar el codigo
+                    if (data.isExist) {
+
+                        const newFile = document.createElement("tr");
+
+                        const dni_file = document.createElement("td");
+                        const fullName_file = document.createElement("td");
+                        const town_file = document.createElement("td");
+                        dni_file.textContent = data.id;
+                        fullName_file.textContent = data.fullName;
+                        town_file.textContent = data.town;
+
+
+                        newFile.appendChild(dni_file);
+                        newFile.appendChild(fullName_file);
+                        newFile.appendChild(town_file);
+
+                        table.appendChild(newFile);
+                    } else {
+                        alert("El dni no existe");
+                    }
+                })
+                .catch(error => {
+                    alert("Erroress: " + error.message);
+
+                });
+        });
+    </script>
 </body>
 
 </html>

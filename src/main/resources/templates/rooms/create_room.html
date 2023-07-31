@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div th:insert="~{template2.html::header}"></div>
+<div th:insert="~{template.html::header}"></div>
 
 <body>
-    <div th:insert="~{template2.html::navbar}"></div>
+    <div th:insert="~{template.html::navbar}"></div>
 
     <div class="container-fluid text-center">
         <div class="row content">
 
-            <div th:insert="~{template2.html::sidebar_left}"></div>
+            <div th:insert="~{template.html::sidebar_left}"></div>
 
             <div class="col-sm-10">
                 <form th:action="@{/rooms/save}" th:object="${room}" method="post"
@@ -58,7 +58,7 @@
     </div>
     </div>
 
-    <div th:insert="~{template2.html::footer}"></div>
+    <div th:insert="~{template.html::footer}"></div>
 
 </body>
 

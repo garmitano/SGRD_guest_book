@@ -1,6 +1,7 @@
 package com.sgrd.management.service.implementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,12 @@ public class GuestServiceImpl implements IGuestService {
     @Override
     public void deleteGuest(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Guest getGuestByDni(Integer id) {
+        Optional<Guest> guestOptional = repository.getGuestByDni(id);
+        return guestOptional.orElse(null);
     }
 
 }

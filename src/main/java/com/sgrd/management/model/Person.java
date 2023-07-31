@@ -47,7 +47,6 @@ public abstract class Person {
     private String phone;
     @Column(length = 35)
     private String email;
-    @Column(length = 8)
     @Temporal(TemporalType.DATE)
     private LocalDate birthdate;
 
