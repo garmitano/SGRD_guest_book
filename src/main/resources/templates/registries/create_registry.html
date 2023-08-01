@@ -10,6 +10,7 @@
         <div class="row content">
 
             <div th:insert="~{template.html::sidebar_left}"></div>
+
             <div class="col-sm-10">
 
 
@@ -48,53 +49,36 @@
                                 <input type="date" th:field="*{registry.checkout}" class="form-control"></label>
                         </div>
                     </div>
-
-                    <!-- pedir un dni y comprobar que existe, y si es asi, cargar los datos en una columna de la tabla -->
                     <br>
                     <div class="col-2">
 
                         <label for="name">DNI pasajero:</label>
-                        <input type="text" id="idGuest">
+                        <input type="text" id="dniGuest">
                         <button type="button" id="addGuest">Agregar</button>
 
                     </div>
-
+                    <br>
                     <div class="row">
 
-                        <table class="table" id="addGuestTable">
+                        <table class="table table-striped" id="addGuestTable">
                             <thead>
                                 <tr>
                                     <th scope="col-2">CheckIn</th>
                                     <th scope="col-2">Habitacion</th>
                                     <th scope="col-2">Empleado</th>
+                                    <th scope="col-2">Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-left">
 
-
-                                    <!-- <td>
-                                        <a th:href="@{/rooms/update/{id}(id=${room.idRoom})}" class="btn btn-info"><i
-                                                class="fas fa-pen"></i>
-                                        </a>
-        
-                                        <a th:href="@{/rooms/delete/{id}(id=${room.idRoom})}" class="btn btn-danger"><i
-                                                class="fas fa-eraser"></i></a>
-                                    </td> -->
-                                </tr>
                             </tbody>
                         </table>
-
-
                     </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
 
-
-
+                </form>
             </div>
-            <br>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-
-            </form>
         </div>
     </div>
     </div>
@@ -104,15 +88,15 @@
     <div th:insert="~{template.html::footer}"></div>
 
     <script>
+
         const table = document.getElementById("addGuestTable");
 
-        // Aquí irá el código JavaScript con Fetch API
         document.getElementById("addGuest").addEventListener("click", function () {
-            var id = document.getElementById("idGuest").value;
-            // Realiza la petición AJAX con Fetch API
+            var dni_guest = document.getElementById("dniGuest").value;
+
             fetch(
-                "http://localhost:8086/registries/new/new?id=" +
-                + encodeURIComponent(id), {
+                "http://localhost:8086/registries/new/new?dni=" +
+                + encodeURIComponent(dni_guest), {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -138,14 +122,22 @@
                         const dni_file = document.createElement("td");
                         const fullName_file = document.createElement("td");
                         const town_file = document.createElement("td");
-                        dni_file.textContent = data.id;
+                        const action = document.createElement("td");
+                        const link = document.createElement("a");
+
+                        dni_file.textContent = data.dni;
                         fullName_file.textContent = data.fullName;
                         town_file.textContent = data.town;
+                        // TODO CAMBIAR POR UN BOTON
+                        link.setAttribute("href", "/");
+                        link.classList.add("btn", "btn-danger");
+                        link.innerHTML = "<i class='fas fa-pen'></i>";
 
 
                         newFile.appendChild(dni_file);
                         newFile.appendChild(fullName_file);
                         newFile.appendChild(town_file);
+                        newFile.appendChild(link);
 
                         table.appendChild(newFile);
                     } else {
@@ -157,6 +149,7 @@
 
                 });
         });
+
     </script>
 </body>
 

@@ -9,7 +9,7 @@
         <div class="row content">
             <div th:insert="~{template.html::sidebar_left}"></div>
             <div class="col-sm-10">
-                <table class="table">
+                <table class="table table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">DNI</th>
@@ -29,8 +29,6 @@
                             <td th:text="${guest.province}"></td>
                             <td th:text="${guest.country}"></td>
                             <td th:text="${guest.type}"></td>
-
-
                             <td>
                                 <a th:href="@{/guests/update/{id}(id=${guest.idPerson})}" class="btn btn-info"><i
                                         class="fas fa-pen"></i>

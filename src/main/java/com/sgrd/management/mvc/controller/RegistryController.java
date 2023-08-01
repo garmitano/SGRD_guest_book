@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sgrd.management.model.Employee;
 import com.sgrd.management.model.Guest;
@@ -28,6 +28,9 @@ import com.sgrd.management.service.implementation.RoomServiceImpl;
 
 @Controller
 public class RegistryController {
+    private Map<String, Object> datos = new HashMap<>();
+    private List<Long> listIdGuest = new ArrayList<>();
+
     @Autowired
     private RegistryServiceImpl service;
     @Autowired
@@ -38,12 +41,14 @@ public class RegistryController {
     private EmployeeServiceImpl employeeService;
 
     @GetMapping("/registries")
+    @CrossOrigin(origins = "http://localhost:8086", methods = { RequestMethod.GET, RequestMethod.POST })
     public String listAllRegistries(Model model) throws Exception {
         model.addAttribute("listRegistries", service.listAll());
         return "/registries/registries";
     }
 
     @GetMapping("/registries/new")
+    @CrossOrigin(origins = "http://localhost:8086", methods = { RequestMethod.GET, RequestMethod.POST })
     public String showFormNewRegistry(Model model) throws Exception {
         try {
             RegistryViewModel registryViewModel = new RegistryViewModel();
@@ -66,40 +71,34 @@ public class RegistryController {
     }
 
     @PostMapping("/registries/save")
+    @CrossOrigin(origins = "http://localhost:8086", methods = { RequestMethod.GET, RequestMethod.POST })
     public String saveRegistry(@ModelAttribute("registryViewModel") RegistryViewModel registryViewModel)
             throws Exception {
+        // TODO DRY in registry
         service.addNewOne(registryViewModel.getRegistry());
-        // service.addDetails(registryViewModel.getListIdGuest(),
-        // registryViewModel.getRegistry());
-        System.out.println("ESTE ES EL NRO DE ******: ");
+        service.addDetails(listIdGuest, registryViewModel.getRegistry());
+
         return "redirect:/registries";
     }
 
-    @GetMapping("/registries/create_registry2")
-    public String showFormNewRegistry2(Model model) throws Exception {
-        model.addAttribute("listRegistries", service.listAll());
-        return "/registries/create_registry2";
-    }
+    @GetMapping("/registries/new/new{dni}")
+    @CrossOrigin(origins = "http://localhost:8086", methods = { RequestMethod.GET, RequestMethod.POST })
+    public ResponseEntity<Map<String, Object>> consultarDatos(@RequestParam("dni") Integer dni) {
 
-    @GetMapping("/registries/new/new{id}")
-    public ResponseEntity<Map<String, Object>> consultarDatos(@RequestParam("id") Integer id) {
-
-        // ... Lógica para consultar los datos y preparar la respuesta como un objeto
-        // JSON
         boolean isExtist = false;
-        Map<String, Object> datos = new HashMap<>();
 
-        Guest currentGuest = guestService.getGuestByDni(id);
+        Guest currentGuest = guestService.getGuestByDni(dni);
 
         if (currentGuest != null) {
             isExtist = true;
+            listIdGuest.add(currentGuest.getIdPerson());
+            datos.put("dni", dni);
             datos.put("fullName", currentGuest.getFullName());
             datos.put("town", currentGuest.getTown());
         }
 
         datos.put("isExist", isExtist);
-        datos.put("id", id);
-        // Devuelve la respuesta al cliente como un objeto JSON
+
         return ResponseEntity.ok(datos);
     }
 }
